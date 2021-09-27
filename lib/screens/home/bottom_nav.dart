@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class AppBottomNav extends StatefulWidget {
-  const AppBottomNav({Key? key}) : super(key: key);
+class AppBottomNav extends StatelessWidget {
+  final int currentIndex;
+  final Function onTap;
 
-  @override
-  State<AppBottomNav> createState() => _AppBottomNavState();
-}
-
-class _AppBottomNavState extends State<AppBottomNav> {
-  int _currentIndex = 0;
+  const AppBottomNav({
+    required this.currentIndex,
+    required this.onTap,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +33,8 @@ class _AppBottomNavState extends State<AppBottomNav> {
           tooltip: 'Account',
         )
       ],
-      onTap: (i) {
-        setState(() {
-          _currentIndex = i;
-        });
-      },
-      currentIndex: _currentIndex,
+      onTap: (i) => onTap(i),
+      currentIndex: currentIndex,
       type: BottomNavigationBarType.shifting,
       selectedItemColor: Theme.of(context).primaryColor,
       unselectedItemColor: Theme.of(context).primaryColor,

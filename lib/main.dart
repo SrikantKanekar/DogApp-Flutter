@@ -1,4 +1,7 @@
+import 'dart:collection';
+
 import 'package:dog_app/provider/auth.dart';
+import 'package:dog_app/provider/breeds.dart';
 import 'package:dog_app/screens/auth/auth_screen.dart';
 import 'package:dog_app/screens/detail/detail_screen.dart';
 import 'package:dog_app/screens/home/home_screen.dart';
@@ -19,6 +22,11 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(
           value: Auth(),
+        ),
+        ChangeNotifierProxyProvider<Auth, Breeds>(
+          update: (ctx, auth, previous) {
+            return Breeds(previous == null ? HashMap() : previous.items);
+          },
         )
       ],
       child: Consumer<Auth>(

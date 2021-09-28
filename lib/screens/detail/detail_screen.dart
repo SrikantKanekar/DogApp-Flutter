@@ -1,3 +1,4 @@
+import 'package:dog_app/provider/auth.dart';
 import 'package:dog_app/provider/breeds.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,10 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      name = ModalRoute.of(context)!.settings.arguments as String;
+      name = ModalRoute
+          .of(context)!
+          .settings
+          .arguments as String;
       setState(() {
         _isLoading = true;
       });
@@ -42,24 +46,39 @@ class _DetailScreenState extends State<DetailScreen> {
         title: Text(name),
       ),
       body: _isLoading
-            ? const CircularProgressIndicator()
-            : GridView.builder(
-                padding: const EdgeInsets.all(10),
-                itemCount: images.length,
-                itemBuilder: (ctx, i) => GridTile(
-                  child: Image.network(images[i], fit: BoxFit.cover,),
-                ),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 3 / 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                ),
+          ? const CircularProgressIndicator()
+          : GridView.builder(
+        padding: const EdgeInsets.all(10),
+        itemCount: images.length,
+        itemBuilder: (ctx, i) =>
+            GridTile(
+              child: Image.network(
+                images[i],
+                fit: BoxFit.cover,
               ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.favorite_outline),
-        onPressed: () {},
-        tooltip: 'Add to Favourites',
+            ),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 3 / 2,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+        ),
+      ),
+      floatingActionButton: Consumer<Auth>(
+        builder: (ctx, auth, ch) =>
+            FloatingActionButton(
+              child: auth.isFav(name)
+                  ? const Icon(Icons.favorite)
+                  : const Icon(Icons.favorite_outline),
+              onPressed: () {
+                if(auth.isFav(name)){
+                  auth.removeFavourites(name);
+                } else {
+                  auth.addFavourites(name);
+                }
+              },
+              tooltip: 'Add to Favourites',
+            ),
       ),
     );
   }

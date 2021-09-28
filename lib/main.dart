@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProxyProvider<Auth, Breeds>(
           update: (ctx, auth, previous) {
-            return Breeds(previous == null ? HashMap() : previous.items);
+            return Breeds(previous == null ? [] : previous.items);
           },
         )
       ],

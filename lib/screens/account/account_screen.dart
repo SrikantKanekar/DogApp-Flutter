@@ -44,12 +44,12 @@ class AccountScreen extends StatelessWidget {
             )
           ],
         ),
-        const Expanded(
+        Expanded(
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Text(
-              'Favourites Count: 0',
-              style: TextStyle(fontSize: 20),
+              'Favourites Count: ${auth.getUser!.favourites.length}',
+              style: const TextStyle(fontSize: 20),
             ),
           ),
         ),

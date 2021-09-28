@@ -72,4 +72,24 @@ class Auth with ChangeNotifier {
     await UserDatabase.deleteUser(_user!.email);
     logout();
   }
+
+  Future<void> addFavourites(String name) async {
+    var success = await UserDatabase.addFavourite(_user!.email, name);
+    if (success){
+      _user!.favourites.add(name);
+      notifyListeners();
+    }
+  }
+
+  Future<void> removeFavourites(String name) async {
+    var success = await UserDatabase.removeFavourite(_user!.email, name);
+    if (success){
+      _user!.favourites.remove(name);
+      notifyListeners();
+    }
+  }
+
+  bool isFav(String name){
+    return _user!.favourites.contains(name);
+  }
 }

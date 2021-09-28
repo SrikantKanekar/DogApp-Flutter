@@ -6,11 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class Breeds with ChangeNotifier {
-  final HashMap<String, Breed> _items;
+  List<MapEntry<String, Breed>> _items;
 
   Breeds(this._items);
 
-  HashMap<String, Breed> get items {
+  List<MapEntry<String, Breed>> get items {
     return _items;
   }
 
@@ -29,7 +29,7 @@ class Breeds with ChangeNotifier {
         return MapEntry(key, breed);
       }),
     );
-    _items.addAll(newMap);
+    _items.addAll(newMap.entries.toList());
     notifyListeners();
   }
 
@@ -49,5 +49,10 @@ class Breeds with ChangeNotifier {
       list.add(element.toString());
     });
     return list;
+  }
+
+  reverse() {
+    _items = _items.reversed.toList();
+    notifyListeners();
   }
 }

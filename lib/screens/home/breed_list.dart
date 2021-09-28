@@ -43,7 +43,7 @@ class _BreedListState extends State<BreedList> {
             itemBuilder: (ctx, i) {
               return BreedCard(
                 key: ValueKey(i),
-                name: breeds.items.keys.elementAt(i),
+                name: breeds.items.elementAt(i).key,
               );
             },
             itemCount: breeds.items.length,

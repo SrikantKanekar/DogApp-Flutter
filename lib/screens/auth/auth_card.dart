@@ -100,6 +100,7 @@ class _AuthCardState extends State<AuthCard>
             email: _authData['email'] as String,
             username: _authData['username'] as String,
             password: _authData['password'] as String,
+            favourites: []
           ));
         }
       } catch (error) {

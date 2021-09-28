@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dog_app/model/user.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'package:sqflite/sqlite_api.dart';
@@ -10,7 +12,7 @@ class UserDatabase {
       path.join(dbPath!, 'users.db'),
       onCreate: (db, version) {
         return db.execute(
-            'CREATE TABLE user_table (email TEXT PRIMARY KEY, username TEXT, password TEXT)');
+            'CREATE TABLE user_table (email TEXT PRIMARY KEY, username TEXT, password TEXT, favourites TEXT)');
       },
       version: 1,
     );
@@ -38,7 +40,30 @@ class UserDatabase {
 
   static Future<void> deleteUser(String email) async {
     final db = await UserDatabase._database();
-    final json =
-        await db.delete('user_table', where: 'email = ?', whereArgs: [email]);
+    await db.delete('user_table', where: 'email = ?', whereArgs: [email]);
+  }
+
+  static Future<bool> addFavourite(String email, String name) async {
+    final db = await UserDatabase._database();
+    var user = await UserDatabase.getUser(email);
+    if (user != null && !user.favourites.contains(name)) {
+      user.favourites.add(name);
+      await db.rawUpdate('UPDATE user_table SET favourites = ? WHERE email = ?',
+          [json.encode(user.favourites), email]);
+      return true;
+    }
+    return false;
+  }
+
+  static Future<bool> removeFavourite(String email, String name) async {
+    final db = await UserDatabase._database();
+    var user = await UserDatabase.getUser(email);
+    if (user != null && user.favourites.contains(name)) {
+      user.favourites.remove(name);
+      await db.rawUpdate('UPDATE user_table SET favourites = ? WHERE email = ?',
+          [json.encode(user.favourites), email]);
+      return true;
+    }
+    return false;
   }
 }

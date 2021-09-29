@@ -1,5 +1,4 @@
 import 'package:dog_app/provider/auth.dart';
-import 'package:dog_app/provider/breeds.dart';
 import 'package:dog_app/screens/home/breed_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

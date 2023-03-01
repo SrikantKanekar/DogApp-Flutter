@@ -1,16 +1,14 @@
-# dog_app
+# DogApp
 
-A new Flutter project.
+A simple flutter application for Android and iOS which displays the list of dog breeds from https://dog.ceo/ Api and cache it in local database
 
-## Getting Started
+## Screenshots
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="/screenshots/home.png" width="260"> &emsp; 
+<img src="/screenshots/favourites.png" width="260"> &emsp; 
+<img src="/screenshots/drawer.png" width="260"> &emsp; 
+<img src="/screenshots/detail.png" width="260"> &emsp; 
+<img src="/screenshots/sorting.png" width="260"> &emsp; 
+<img src="/screenshots/account.png" width="260"> &emsp; 
+<img src="/screenshots/login.png" width="260"> &emsp; 
+<img src="/screenshots/register.png" width="260"> &emsp; 

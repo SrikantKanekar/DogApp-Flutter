@@ -1,6 +1,6 @@
 # DogApp
 
-A simple flutter application for Android and iOS which displays the list of dog breeds from https://dog.ceo/ Api and cache it in local database
+This Android app is a must-have for dog lovers, as it fetches dog breed information from the https://dog.ceo/ API and offers users the ability to browse breed lists and view detailed information about each breed, including multiple breed images on the details page. The app also allows users to mark their favourite breeds for easy reference. Additionally, the app supports offline caching to ensure that users can access breed information even without an internet connection.
 
 ## Screenshots
 
